@@ -3,7 +3,7 @@ module.exports = {
   "development": {
     "username": "root",
     "password": process.env.MYSQL_PASS,
-    "database": "exampledb",
+    "database": "fyre_db",
     "host": "localhost",
     "dialect": "mysql"
   },
