@@ -1,10 +1,12 @@
-  <link rel="stylesheet" href="/styles/index.css" />
-   
+<link rel="stylesheet" href="/styles/index.css" />
+
 </head>
 
 <body>
 
-    <a href="#" class="ml-3"><h3 class="mt-3">View Playlist</h3></a>
+    <a href="#" class="ml-3">
+        <h3 class="mt-3">View Playlist</h3>
+    </a>
     <div class="container my-3">
         <h1 class="text-center">Fyre</h1>
         <br>
@@ -15,8 +17,47 @@
         </div>
     </div>
 
+
+
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            const token = "BQCPKUE0Bn6b2zx7YauUPYWS9G58JBV3ka2QqaZm58Xd8dbD-r7gB9suxJCEeYuyMfVpHkwTZloRFyFBoLIgjhiuZf2EtE37G-G0xgxlKY9nejIPdgXSWufpdjWh8RcfuzSTMx0-5kQK6ld8WXnGOSmT5D8VojLCIEHV07ZYaMy8zTjbbpl4W0I";
+            var player = new Spotify.Player({
+                name: 'A Spotify Web SDK Player',
+                getOAuthToken: cb => { cb(token); }, volume: 0.1
+            });
+
+            player.addListener('ready', ({ device_id }) => {
+
+                const play = ({
+                    spotify_uri,
+                    playerInstance: {
+                        _options: {
+                            getOAuthToken,
+                            id
+                        }
+                    }
+                }) => {
+                    getOAuthToken(access_token => {
+                        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+                            method: 'PUT',
+                            body: JSON.stringify({ uris: [spotify_uri] }),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer {{token}}`
+                            },
+                        });
+                    });
+                };
+
+                play({
+                    playerInstance: player,
+                    spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+                });
+            });
+            player.connect();
+        };
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
-
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
