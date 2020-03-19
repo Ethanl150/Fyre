@@ -27,7 +27,13 @@ body {
     font-size: 4rem;
     text-shadow: 3px 3px 10px  black
   }
-  
+  h2{
+    position: absolute;
+    bottom: 700px;
+    left: 10px;
+    font-size: 30px;
+}
+
   a {
     display: block;
     color: orangered;
@@ -38,3 +44,16 @@ body {
     color: orange;
     text-decoration: none;
   }
+  .list-group-item {
+    height: 45px;
+    width: 158px;
+    position: abolute;
+    bottom: 470px;
+    right: 5px;
+    background-color:lightblue;
+    color: black;
+}
+.list-group-item.active{
+    background-color: lightblue;
+    color: black;
+}
