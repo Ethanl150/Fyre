@@ -24,7 +24,7 @@ var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
-var generateRandomString = function(length) {
+var generateRandomString = function (length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -39,30 +39,30 @@ var stateKey = 'spotify_auth_state';
 var app = express();
 
 app.use(express.static(__dirname + '/public'))
-   .use(cors())
-   .use(cookieParser());
+  .use(cors())
+  .use(cookieParser());
 
-   app.engine(
-    "handlebars",
-    exphbs({
-      defaultLayout: "main"
-    })
-  );
-  app.set("view engine", "handlebars");
-
-  app.get('/index/:token', function (req, res) {
-    const token = req.params.token;
-    res.render("index", {token: token})
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main"
   })
+);
+app.set("view engine", "handlebars");
 
-app.get('/login', function(req, res) {
+app.get('/index/:token', function (req, res) {
+  const token = req.params.token;
+  res.render("index", { token: token })
+})
+
+app.get('/login', function (req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'streaming user-read-private user-read-email playlist-modify-private';
-  // res.redirect("/")
+
+  var scope = 'streaming user-read-private user-read-email playlist-modify-private user-read-playback-state user-modify-playback-state';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -71,14 +71,13 @@ app.get('/login', function(req, res) {
       redirect_uri: redirect_uri,
       state: state
     }));
-    // res.redirect("/index")
 });
 
-app.get('/callback', function(req, res) {
-  
+app.get('/callback', function (req, res) {
+
   // your application requests refresh and access tokens
   // after checking the state parameter
-  
+
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -103,14 +102,11 @@ app.get('/callback', function(req, res) {
       json: true
     };
 
-    request.post(authOptions, function(error, response, body) {
+    request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
-            refresh_token = body.refresh_token;
-
-            
-            console.log("------------------------" + access_token + "-----------------")
+          refresh_token = body.refresh_token;
 
         var options = {
           url: 'https://api.spotify.com/v1/me',
@@ -119,28 +115,28 @@ app.get('/callback', function(req, res) {
         };
 
         // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
+        request.get(options, function (error, response, body) {
           console.log(body);
         });
 
         // we can also pass the token to the browser to make requests from there
-      //   res.redirect('/#' +
-      //     querystring.stringify({
-      //       access_token: access_token,
-      //       refresh_token: refresh_token
-      //     }));
-      // } else {
-      //   res.redirect('/#' +
-      //     querystring.stringify({
-      //       error: 'invalid_token'
-      //     }));
+        //   res.redirect('/#' +
+        //     querystring.stringify({
+        //       access_token: access_token,
+        //       refresh_token: refresh_token
+        //     }));
+        // } else {
+        //   res.redirect('/#' +
+        //     querystring.stringify({
+        //       error: 'invalid_token'
+        //     }));
         res.redirect("/index/" + access_token)
       }
     });
   }
 });
 
-app.get('/refresh_token', function(req, res) {
+app.get('/refresh_token', function (req, res) {
 
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
@@ -154,7 +150,7 @@ app.get('/refresh_token', function(req, res) {
     json: true
   };
 
-  request.post(authOptions, function(error, response, body) {
+  request.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       var access_token = body.access_token;
       res.send({
@@ -163,46 +159,6 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
-
-// app.get('/index', function (req, res) {
-//   res.render("index")
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 console.log('Listening on 8888');
 app.listen(8888);
