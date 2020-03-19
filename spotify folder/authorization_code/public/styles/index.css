@@ -5,11 +5,23 @@ body {
     color: orangered;
   }
   
-  #placeholder {
+  #image {
     background-color: lightblue;
     width: 400px;
     height: 400px;
     margin: auto;
+  }
+
+  #artistName {
+    position: absolute;
+    bottom: 211px;
+    left: 155px;
+  }
+
+  #songName {
+    position: absolute;
+    bottom: 184px;
+    left: 161px;
   }
   
   #buttons {
