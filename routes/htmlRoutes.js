@@ -60,6 +60,11 @@ module.exports = function(app) {
       }));
   });
   
+  app.get('/', function(req, res) {
+    res.render('login')
+  })
+
+
   app.get('/callback', function (req, res) {
   
     // your application requests refresh and access tokens
