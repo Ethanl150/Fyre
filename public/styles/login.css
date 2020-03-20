@@ -1,18 +1,14 @@
-/* 
-.body {
+
+/* .body {
     background: url("background.jpg") center center fixed;
     background-size: cover;
     font-family: "Noto Sans", sans-serif;
     background-repeat: no-repeat;
     margin-left: auto;
     margin-right: auto;
-} */
+} 
 
-
-
-
-/* Mobile Platform */
-/* .phone {
+.phone {
     width: 350px;
     height: 600px;
     font-family: 'Noto Sans', sans-serif;
@@ -72,4 +68,4 @@ span.meta span {
     width: 100%;
     padding-left: 40px;
     padding-top: 6px;
-}
+} */

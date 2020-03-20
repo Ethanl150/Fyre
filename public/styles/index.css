@@ -1,40 +1,73 @@
 body {
-  background: url("https://img.freepik.com/free-photo/wall-wallpaper-concrete-colored-painted-textured-concept_53876-31799.jpg?size=626&ext=jpg") no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Righteous', cursive;
-  color: orangered;
-}
+    background: url("https://img.freepik.com/free-photo/wall-wallpaper-concrete-colored-painted-textured-concept_53876-31799.jpg?size=626&ext=jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Righteous', cursive;
+    color: orangered;
+  }
+  
+  #image {
+    background-color: lightblue;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    background-size: cover;
+  }
 
-#placeholder {
-  background-color: lightblue;
-  width: 400px;
-  height: 400px;
-  margin: auto;
-}
+  #artistAndSong {
+    display: flex;
+    flex-flow: column-reverse;
+    width: 15em;
+    height: 23em;
+    margin: auto;
+  }
+  
+  
+  #buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  button {
+    width: 4rem;
+    height: 4rem;
+    box-shadow: 6px 6px 10px  black;
+  }
+  
+  h1 {
+    font-size: 4rem;
+    text-shadow: 3px 3px 10px  black
+  }
+  h2{
+    position: absolute;
+    bottom: 700px;
+    left: 10px;
+    font-size: 30px;
+  }
 
-#buttons {
-  display: flex;
-  justify-content: space-around;
-}
+  h4 {
+    color: white;
+  }
 
-button {
-  width: 4rem;
-  height: 4rem;
-  box-shadow: 6px 6px 10px  black;
+  a {
+    display: block;
+    color: orangered;
+    width: max-content;
+  }
+  
+  a:hover {
+    color: orange;
+    text-decoration: none;
+  }
+  .list-group-item {
+    height: 45px;
+    width: 158px;
+    position: abolute;
+    bottom: 470px;
+    right: 5px;
+    background-color:lightblue;
+    color: black;
 }
-
-h1 {
-  font-size: 4rem;
-  text-shadow: 3px 3px 10px  black
-}
-
-a {
-  display: block;
-  color: orangered;
-  width: max-content;
-}
-
-a:hover {
-  color: orange;
-  text-decoration: none;
+.list-group-item.active{
+    background-color: lightblue;
+    color: black;
 }

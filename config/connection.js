@@ -1,8 +1,7 @@
-// Dependencies
 var Sequelize = require("sequelize");
+require("dotenv").config();
 
-// Creates mySQL connection using Sequelize, the empty string in the third argument spot is our password.
-var sequelize = new Sequelize("fyre", "root", process.env.MYSQL_PASS, {
+var sequelize = new Sequelize("fyre_db", "root", process.env.MYSQL_PASS, {
   host: "localhost",
   port: 3306,
   dialect: "mysql",
@@ -13,6 +12,5 @@ var sequelize = new Sequelize("fyre", "root", process.env.MYSQL_PASS, {
   }
 });
 
-// Exports the connection for other files to use
 module.exports = sequelize;
 
