@@ -2,7 +2,7 @@
  
 ## Description: 
 
-Fyre is hot new music application that allows users to discover their new favorite songs. Upon entering the user's Spotify login to verify credentials for our Spotify API, the user will be directed to our home page where they can pick a genre. Once genre is pick, a random playlist will begin playing 30 second previews of songs in that genre for the user. From their, the user can decide if the preview is "Fyre" by clicking the flame icon OR "Trash" by clicking the trash icon. Upon clicking the "Fyre" flame icon, the song shall be added into the users main playlist. On the playlist page, users can add or delete songs manually!
+Fyre is hot new music application that allows users to discover their new favorite songs. Upon entering the user's Spotify login to verify credentials for our Spotify API, the user will be directed to our home page where a random playlist will begin playing 30 second previews of songs for the user. From there, the user can decide if the preview is "Fyre" by clicking the flame icon OR "Trash" by clicking the trash icon. Upon clicking the "Fyre" flame icon, the song shall be added into the users main playlist. On the playlist page, users can add or delete songs manually!
 
 ## Table Of Contents:
 
@@ -19,7 +19,7 @@ Access our application with our deployed link in your web browser: <URL HERE>
 
 ## Usage
 
-Once you have clicked in to log in to your Spotify account, simply choose a genre and song previews of said genre will begin to play! Once you have decided on a song if it is "hot" or not, click on the "Fyre" icon to add to playlist or the trash icon to skip to the next song preview. Users can click "View Playlist" to be directed to their saved playlist of all the song's they have deemed "Fyre."
+Once you have decided on a song if it is "hot" or not, click on the "Fyre" icon to add to playlist or the trash icon to skip to the next song preview. Users can click "View Playlist" to be directed to their saved playlist of all the song's they have deemed "Fyre."
 
 ## Technologies Used / Badges
 ![HTML](https://img.shields.io/badge/Language-HTML5-orange) ![CSS](https://img.shields.io/badge/Language-CSS-blue) ![JS](https://img.shields.io/badge/Language-JavaScript-yellow) ![MySQL](https://img.shields.io/badge/Language-MySQL-blue) ![Heroku](https://img.shields.io/badge/Deployed-Heroku-purple) ![Bootstrap](https://img.shields.io/badge/Framework-Bootstrap-purple)

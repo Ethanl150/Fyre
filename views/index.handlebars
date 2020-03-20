@@ -18,7 +18,7 @@
         </div>
         <div id="buttons" class="my-4">
             <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
-            <button class="btn btn-success" type="submit">&#128293</button>
+            <button class="btn btn-success" id="fire-btn" type="submit">&#128293</button>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script>
         window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = "BQDghhFnX3ZQm6WQ1xTtDl4R2IN6xQVCXFvuqkWjU2EzhTpItO6_BhK-3i-H8_RjI0-c79dREOguX0YoT4tLrocnEKHuJAr2LCrHzFlnjFsBvS-wnXP0V-5v3iGZkZ4QnFzBDeRoeq42WB3KcnMroAppAgA-EFb_QrNhSrpJafdAnpB2CoOV6j8";
+            const token = "{{token}}";
             var player = new Spotify.Player({
                 name: 'A Spotify Web SDK Player',
                 getOAuthToken: cb => { cb(token); }, volume: 0.1
@@ -99,9 +99,25 @@
                     $("#songName").text("Song: " + song)
                     $("#artistName").text("By " + artist)
                     $("#image").css("background-image", "url(" + img + ")");
+
+                    $("#fire-btn").on("click", function (event) {
+                        event.preventDefault();
+                        console.log("click")
+                        const newPlaylist = {
+                            title: song,
+                            artist: artist,
+                            genre: ""
+                        }
+                        $.post("/api/new", newPlaylist)
+                            .done(function (data) {
+                                console.log(data) //
+                            });
+
+                    }); //click function
                 }
             })
         }, 2000);
+
 
 
 
