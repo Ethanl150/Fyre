@@ -3,7 +3,10 @@ const Playlist = require("../models/playlistModel.js");
 module.exports = function (app) {
 
   app.post("/api/new", function (req, res) {
-    Playlist.create(req.body).then(function (data) {
+    Playlist.create({
+      title: req.body.title,
+      artist: req.body.artist
+    }).then(function (data) {
       res.json(data)
     })
   })

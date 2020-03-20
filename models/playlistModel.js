@@ -4,12 +4,13 @@ const Sequelize = require("sequelize");
 const sequelize = require("../config/connection");
 
 const Playlist = sequelize.define("playlist", {
+  image: Sequelize.STRING,
   // the name of the artist track (a string)
   title: Sequelize.STRING,
   // the name of the artist (a string)
   artist: Sequelize.STRING,
   // the genre (a string)
-  genre: Sequelize.STRING,
+  album: Sequelize.STRING,
 });
 
 // Syncs with DB

@@ -31,10 +31,12 @@ module.exports = function(app) {
     res.render("index", { token: token })
   })
 
-  app.get('/playlist', function(req, res) {
+  app.get('/playlist/:token', function(req, res) {
+    const token = req.params.token;
     Playlist.findAll({}).then(function(data) {
       res.render("playlist", {
-        playlist: data
+        playlist: data,
+        token: token
       })
     })
   })

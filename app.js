@@ -14,8 +14,11 @@ var exphbs = require("express-handlebars")
 
 
 
-
 var app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 app.use(express.static(__dirname + '/public'))
   .use(cors())
@@ -29,6 +32,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+require("./routes/apiRoutes.js")(app)
 require("./routes/htmlRoutes.js")(app)
 
 console.log('Listening on 8888');
