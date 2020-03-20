@@ -4,13 +4,13 @@
 
 <body>
 
-    <a href="#" class="ml-3">
+    <a href="/playlist/{{token}}" class="ml-3">
         <h3 class="mt-3">View Playlist</h3>
     </a>
     <div class="container my-3">
         <h1 class="text-center">Fyre</h1>
         <br>
-        <div id="image" class="text-center">
+        <div id="indexImage" class="text-center">
             <div id="artistAndSong">
                 <h4 id="artistName">Artist: artistName</h4>
                 <h4 id="songName">Song: songName</h4>
@@ -18,7 +18,7 @@
         </div>
         <div id="buttons" class="my-4">
             <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
-            <button class="btn btn-success" type="submit">&#128293</button>
+            <button id="fyre-btn" class="btn btn-success" type="submit">&#128293</button>
         </div>
     </div>
 
@@ -98,10 +98,36 @@
 
                     $("#songName").text("Song: " + song)
                     $("#artistName").text("By " + artist)
-                    $("#image").css("background-image", "url(" + img + ")");
+                    $("#indexImage").css("background-image", "url(" + img + ")");
+
+                    $("#fyre-btn").on("click", function (event) {
+                        event.preventDefault();
+                        console.log("click")
+                        console.log(song)
+                        const newPlaylist = {
+                            title: song,
+                            artist: artist
+                        };
+                        $.post("/api/new", newPlaylist)
+                            .then(function (data) {
+                                console.log(data)
+                            });
+                    })
+
+
+
                 }
             })
+
+
+
+
+
+
         }, 2000);
+
+
+
 
 
 

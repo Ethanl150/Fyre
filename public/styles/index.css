@@ -5,7 +5,7 @@ body {
     color: orangered;
   }
   
-  #image {
+  #indexImage {
     background-color: lightblue;
     width: 400px;
     height: 400px;
@@ -37,11 +37,10 @@ body {
     font-size: 4rem;
     text-shadow: 3px 3px 10px  black
   }
-  h2{
-    position: absolute;
-    bottom: 700px;
-    left: 10px;
-    font-size: 30px;
+
+  h2 {
+    font-size: 2.5rem;
+    text-shadow: 3px 3px 10px  black
   }
 
   h4 {
@@ -58,6 +57,15 @@ body {
     color: orange;
     text-decoration: none;
   }
+
+  #addFyre {
+    text-decoration: underline;
+  }
+
+  .delete {
+    margin: auto 0;
+  }
+
   .list-group-item {
     height: 45px;
     width: 158px;
@@ -70,4 +78,32 @@ body {
 .list-group-item.active{
     background-color: lightblue;
     color: black;
+}
+
+
+
+
+.playlistRows {
+  background-image: url("/styles/gradient.png");
+}
+
+.row {
+  height: 10rem;
+}
+
+.info {
+  display: flex;
+ justify-content: space-around; 
+
+}
+
+h5 {
+  color: black;
+  margin: auto 0;
+}
+
+#playlistImage {
+  height: 9rem;
+  width: 9rem;
+  background-color: lightblue;
 }
