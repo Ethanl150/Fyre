@@ -93,6 +93,7 @@
                     let artist = response.item.artists[0].name;
                     let song = response.item.name;
                     let img = JSON.stringify(response.item.album.images[0].url);
+                    let album = response.item.album.name;
 
                     console.log(artist, song, img)
 
@@ -100,13 +101,16 @@
                     $("#artistName").text("By " + artist)
                     $("#indexImage").css("background-image", "url(" + img + ")");
 
+
                     $("#fyre-btn").on("click", function (event) {
                         event.preventDefault();
                         console.log("click")
                         console.log(song)
                         const newPlaylist = {
+                            image: img,
                             title: song,
-                            artist: artist
+                            artist: artist,
+                            album: album
                         };
                         $.post("/api/new", newPlaylist)
                             .then(function (data) {

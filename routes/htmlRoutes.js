@@ -26,6 +26,10 @@ var stateKey = 'spotify_auth_state';
 
 module.exports = function(app) {
 
+  app.get('/', function(req, res) {
+    res.render("login")
+})
+
   app.get('/index/:token', function (req, res) {
     const token = req.params.token;
     res.render("index", { token: token })
@@ -147,7 +151,7 @@ module.exports = function(app) {
     });
   });
 
-
+  
 
 
 
