@@ -25,20 +25,18 @@ var generateRandomString = function (length) {
 var stateKey = 'spotify_auth_state';
 
 module.exports = function(app) {
-  
-app.get('/', function (req, res) {
-  res.render('login')
-})
 
   app.get('/index/:token', function (req, res) {
     const token = req.params.token;
     res.render("index", { token: token })
   })
 
-  app.get('/playlist', function(req, res) {
+  app.get('/playlist/:token', function(req, res) {
+    const token = req.params.token;
     Playlist.findAll({}).then(function(data) {
       res.render("playlist", {
-        playlist: data
+        playlist: data,
+        token: token
       })
     })
   })

@@ -22,7 +22,7 @@ Access our application with our deployed link in your web browser: <URL HERE>
 Once you have decided on a song if it is "hot" or not, click on the "Fyre" icon to add to playlist or the trash icon to skip to the next song preview. Users can click "View Playlist" to be directed to their saved playlist of all the song's they have deemed "Fyre."
 
 ## Technologies Used / Badges
-![HTML](https://img.shields.io/badge/Language-HTML5-orange) ![CSS](https://img.shields.io/badge/Language-CSS-blue) ![JS](https://img.shields.io/badge/Language-JavaScript-yellow) ![MySQL](https://img.shields.io/badge/Language-MySQL-blue) ![Heroku](https://img.shields.io/badge/Deployed-Heroku-purple) ![Bootstrap](https://img.shields.io/badge/Framework-Bootstrap-purple)
+![HTML](https://img.shields.io/badge/Language-HTML5-orange) ![CSS](https://img.shields.io/badge/Language-CSS-blue) ![JS](https://img.shields.io/badge/Language-JavaScript-yellow) ![MySQL](https://img.shields.io/badge/Language-MySQL-blue) ![Heroku](https://img.shields.io/badge/Deployed-Heroku-purple) ![Bootstrap](https://img.shields.io/badge/Framework-Bootstrap-purple) ![Spotify](https://img.shields.io/badge/API-Spotify-green)
 
 ## Contributors
 
