@@ -52,7 +52,7 @@ module.exports = function(app) {
   
     // your application requests authorization
   
-    var scope = 'streaming user-read-private user-read-email playlist-modify-private user-read-playback-state user-read-currently-playing';
+    var scope = 'streaming user-read-private user-read-email playlist-modify-private user-read-playback-state user-read-currently-playing user-modify-playback-state';
   
     res.redirect('https://accounts.spotify.com/authorize?' +
       querystring.stringify({
