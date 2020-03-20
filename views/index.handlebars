@@ -58,7 +58,7 @@
 
                 play({
                     playerInstance: player,
-                    spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+                    spotify_uri: 'spotify:playlist:37i9dQZF1DXcBWIGoYBM5M',
                 });
             });
 
@@ -90,9 +90,9 @@
                 },
                 success: function (response) {
                     console.log(response)
-                    let artist = response.item.artists[0].name;
-                    let song = response.item.name;
                     let img = JSON.stringify(response.item.album.images[0].url);
+                    let song = response.item.name;
+                    let artist = response.item.artists[0].name;
                     let album = response.item.album.name;
 
                     console.log(artist, song, img)
@@ -101,25 +101,45 @@
                     $("#artistName").text("By " + artist)
                     $("#indexImage").css("background-image", "url(" + img + ")");
 
-
-                    $("#fyre-btn").on("click", function (event) {
-                        event.preventDefault();
-                        console.log("click")
-                        console.log(song)
-                        const newPlaylist = {
-                            image: img,
-                            title: song,
-                            artist: artist,
-                            album: album
-                        };
-                        $.post("/api/new", newPlaylist)
-                            .then(function (data) {
-                                console.log(data)
-                            });
-                    })
                 }
             })
         }, 2000);
+
+        $("#fyre-btn").on("click", function (event) {
+            event.preventDefault();
+            console.log("click")
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.spotify.com/v1/me/player/currently-playing',
+                headers: {
+                    'Authorization': `Bearer {{token}}`
+                },
+                success: function (response) {
+                    console.log(response)
+                    let img = JSON.stringify(response.item.album.images[0].url);
+                    let song = response.item.name;
+                    let artist = response.item.artists[0].name;
+                    let album = response.item.album.name;
+
+                    const newPlaylist = {
+                        image: img,
+                        title: song,
+                        artist: artist,
+                        album: album
+                    };
+                    $.ajax({
+                        method: 'POST',
+                        url: '/api/new',
+                        data: newPlaylist,
+                        success: function (data) {
+                            console.log('hello')
+                           
+                        }
+                    })
+                }
+            });
+        });
+
 
 
 

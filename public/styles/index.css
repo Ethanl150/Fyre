@@ -4,6 +4,11 @@ body {
     font-family: 'Righteous', cursive;
     color: orangered;
   }
+
+  #loginBtn {
+    display: block;
+    margin: auto;
+  }
   
   #indexImage {
     background-color: lightblue;
