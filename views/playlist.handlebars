@@ -19,7 +19,7 @@
                 <h5>Title: {{this.title}}</h5>
                 <h5>Artist: {{this.artist}}</h5>
                 <h5>Album: {{this.album}}</h5>
-                <button class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
+                <button data-id="{{this.id}}" class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
             </div>
         </div>
         <hr>
@@ -31,5 +31,29 @@
         <h2 id="addFyre">Add fyre here!</h2>
     </a>
 
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
+$(".delete").click(function() {
+    console.log("clikc")
+    let info = {
+        id: $(this).attr("data-id")
+    };
+    $.post("/api/delete", info).done(function(deldata) {
+        console.log("deleted")
+    });
+    $(this).closest("div").remove();
+    location.reload();
+});
+
+
+</script>
 </body>
+
+{{!-- $.ajax({
+    url: '/script.cgi',
+    type: 'DELETE',
+    success: function(result) {
+        // Do something with the result
+    }
+}); --}}

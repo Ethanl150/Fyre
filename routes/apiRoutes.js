@@ -59,6 +59,9 @@ module.exports = function(app) {
       where: {
         id: req.body.id
       }
+    }, function(data){
+      res.redirect(req.get('referer'))
+      
     });
   });
 
