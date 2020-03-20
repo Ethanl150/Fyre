@@ -46,9 +46,10 @@ module.exports = function(app) {
   //add a song to playlist page
   app.post("/api/new", function(req, res) {
     Playlist.create({
+      image: req.body.image,
       title: req.body.title,
       artist: req.body.artist,
-      genre: req.body.genre
+      album: req.body.album
     });
   });
 
@@ -58,6 +59,9 @@ module.exports = function(app) {
       where: {
         id: req.body.id
       }
+    }, function(data){
+      res.redirect(req.get('referer'))
+      
     });
   });
 

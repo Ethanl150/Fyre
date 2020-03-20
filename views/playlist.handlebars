@@ -11,64 +11,49 @@
     {{/unless}}
     <div class="playlistRows container my-5">
 
- 
-        {{!-- <div class="row">
-            <div id="playlistImage" class="col-2 my-2 ml-5"></div>
-            <div class="col-9 info">
-                <h5>Title: this is a ttile</h5>
-                <h5>Artist: this is an artist</h5>
-                <h5>Genre: the grenre</h5>
-                 <button class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div id="playlistImage" class="col-2 my-2 ml-5"></div>
-            <div class="col-9 info">
-                <h5>Title: this is a ttile</h5>
-                <h5>Artist: this is an artist</h5>
-                <h5>Genre: the grenre</h5>
-                 <button class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div id="playlistImage" class="col-2 my-2 ml-5"></div>
-            <div class="col-9 info">
-                <h5>Title: this is a ttile</h5>
-                <h5>Artist: this is an artist</h5>
-                <h5>Genre: the grenre</h5>
-                 <button class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
-            </div>
-        </div>
-        <hr> --}}
-
-
-
-
-
-
-
-
         {{#each playlist}}
         <div class="row">
-            <div id="playlistImage" class="col-sm-2 my-2 ml-5"
+            <div id="playlistImage" class="col-2 my-2 ml-5"
                 style="background-image: url({{this.image}}); background-size: cover;"></div>
-            <div class="col-sm-9 info">
+            <div class="col-9 info">
                 <h5>Title: {{this.title}}</h5>
                 <h5>Artist: {{this.artist}}</h5>
-                <h5>Genre: {{this.genre}}</h5>
+                <h5>Album: {{this.album}}</h5>
+                <button data-id="{{this.id}}" class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
             </div>
-            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
         </div>
         <hr>
         {{/each}}
 
     </div>
 
-<a href="/index/{{token}}" class="my-5 mx-auto">
+    <a href="/index/{{token}}" class="my-5 mx-auto">
         <h2 id="addFyre">Add fyre here!</h2>
     </a>
 
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
+$(".delete").click(function() {
+    console.log("clikc")
+    let info = {
+        id: $(this).attr("data-id")
+    };
+    $.post("/api/delete", info).done(function(deldata) {
+        console.log("deleted")
+    });
+    $(this).closest("div").remove();
+    location.reload();
+});
+
+
+</script>
 </body>
+
+{{!-- $.ajax({
+    url: '/script.cgi',
+    type: 'DELETE',
+    success: function(result) {
+        // Do something with the result
+    }
+}); --}}

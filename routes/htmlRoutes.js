@@ -26,6 +26,10 @@ var stateKey = 'spotify_auth_state';
 
 module.exports = function(app) {
 
+  app.get('/', function(req, res) {
+    res.render("login")
+})
+
   app.get('/index/:token', function (req, res) {
     const token = req.params.token;
     res.render("index", { token: token })
@@ -48,7 +52,7 @@ module.exports = function(app) {
   
     // your application requests authorization
   
-    var scope = 'streaming user-read-private user-read-email playlist-modify-private user-read-playback-state user-read-currently-playing';
+    var scope = 'streaming user-read-private user-read-email playlist-modify-private user-read-playback-state user-read-currently-playing user-modify-playback-state';
   
     res.redirect('https://accounts.spotify.com/authorize?' +
       querystring.stringify({
@@ -152,7 +156,7 @@ module.exports = function(app) {
     });
   });
 
-
+  
 
 
 
