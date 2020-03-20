@@ -2,7 +2,7 @@ require("dotenv").config();
 module.exports = {
   "development": {
     "username": "root",
-    "password": process.env.MYSQL_PASS,
+    "password": "118136aaaA",
     "database": "fyre_db",
     "host": "localhost",
     "dialect": "mysql"
