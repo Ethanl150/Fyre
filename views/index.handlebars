@@ -10,21 +10,16 @@
     <div class="container my-3">
         <h1 class="text-center">Fyre</h1>
         <br>
-        <div id="placeholder" class="text-center">placeholder</div>
+        <div id="image" class="text-center">
+            <div id="artistAndSong">
+                <h4 id="artistName">Artist: artistName</h4>
+                <h4 id="songName">Song: songName</h4>
+            </div>
+        </div>
         <div id="buttons" class="my-4">
             <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
             <button class="btn btn-success" type="submit">&#128293</button>
         </div>
-        <aside class="list-group">
-            <h2>Select Genre</h2>
-            <button id="HHR"type="button" class="list-group-item list-group-item-action">
-                Hip/Hop/Rap
-            </button>
-            <button type="button" class="list-group-item list-group-item-action">R/B</button>
-            <button type="button" class="list-group-item list-group-item-action">POP</button>
-            <button type="button" class="list-group-item list-group-item-action">ROCK</button>
-            <button type="button" class="list-group-item list-group-item-action">EDM</button>
-        </aside>
     </div>
 
 
@@ -32,7 +27,7 @@
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script>
         window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = "BQCPKUE0Bn6b2zx7YauUPYWS9G58JBV3ka2QqaZm58Xd8dbD-r7gB9suxJCEeYuyMfVpHkwTZloRFyFBoLIgjhiuZf2EtE37G-G0xgxlKY9nejIPdgXSWufpdjWh8RcfuzSTMx0-5kQK6ld8WXnGOSmT5D8VojLCIEHV07ZYaMy8zTjbbpl4W0I";
+            const token = "BQASkv2Uz5OIjKXgLBVpiYdqZQVAFSAd1pHUFWK1ugSqPRcMEZyMyvBxIX3oxAEqlBNTc2Q9B-NsZTu5EUnT1f9TquEtPVKfbX-5EDTfoZT77M7LsVMvj7UBRRyJnAy5CdD2ul-NPW4Rui9vJEGSFzfknL2cD-vAg2L2-_BijLBmPMfoRODCXe4";
             var player = new Spotify.Player({
                 name: 'A Spotify Web SDK Player',
                 getOAuthToken: cb => { cb(token); }, volume: 0.1
@@ -66,8 +61,51 @@
                     spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
                 });
             });
+
+
+
             player.connect();
-        };
+
+
+
+
+
+        }
+
+
+
+
+
+
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        setTimeout(function () {
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.spotify.com/v1/me/player/currently-playing',
+                headers: {
+                    'Authorization': `Bearer {{token}}`
+                },
+                success: function (response) {
+                    console.log(response)
+                    let artist = response.item.artists[0].name;
+                    let song = response.item.name;
+                    let img = JSON.stringify(response.item.album.images[0].url);
+
+                    console.log(artist, song, img)
+
+                    $("#songName").text("Song: " + song)
+                    $("#artistName").text("By " + artist)
+                    $("#image").css("background-image", "url(" + img + ")");
+                }
+            })
+        }, 2000);
+
+
+
+
+
+    </script>
 </body>
