@@ -131,10 +131,8 @@
                         method: 'POST',
                         url: '/api/new',
                         data: newPlaylist,
-                        success: function (data) {
-                            console.log('hello')
-                           
-                        }
+                    }).then(function (data) {
+                        console.log(data)
                     })
                 }
             });
@@ -144,4 +142,3 @@
 
     </script>
 </body>
-
