@@ -50,15 +50,19 @@ module.exports = function(app) {
       title: req.body.title,
       artist: req.body.artist,
       album: req.body.album
+    }).then(function (data) {
+      res.json(data)
     });
   });
 
   //delete song on page
-  app.post("/api/delete", function(req, res) {
+  app.delete("/api/delete/:id", function(req, res) {
     Playlist.destroy({
       where: {
-        id: req.body.id
+        id: req.params.id
       }
+    }).then(function(data){
+      res.json(data);
     });
   });
 

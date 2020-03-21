@@ -31,5 +31,24 @@
         <h2 id="addFyre">Add fyre here!</h2>
     </a>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
+
+    $(function() {
+
+        $(".delete").on("click", function (event) {
+            console.log("clicked")
+            let id = parseInt($(this).attr("data-id"))
+
+            $.ajax('/api/delete/' + id, {
+                type: 'DELETE'
+            }).then(function () {
+                console.log("deleted");
+                location.reload();
+            })
+        })
+  })
+
+    </script>
 </body>
