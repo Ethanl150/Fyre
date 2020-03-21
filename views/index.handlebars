@@ -12,20 +12,24 @@
         <br>
         <div id="indexImage" class="text-center">
             <div id="artistAndSong">
-                <h4 id="artistName">Artist: artistName</h4>
-                <h4 id="songName">Song: songName</h4>
+                <h4 id="artistName"></h4>
+                <h4 id="songName"></h4>
             </div>
         </div>
         <div id="buttons" class="my-4">
-            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+            <button id="trash-btn" class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
             <button id="fyre-btn" class="btn btn-success" type="submit">&#128293</button>
         </div>
     </div>
 
 
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
-    <script>
+
+    <script type="text/javascript">
+        const songs = ['spotify:track:1rlIrbWboTRGeKfHhgbJRZ', 'spotify:track:3n3Ppam7vgaVa1iaRUc9Lp', 'spotify:track:3twNvmDtFQtAd5gMKedhLD', 'spotify:track:0sf12qNH5qcw8qpgymFOqD', 'spotify:track:6WrI0LAC5M1Rw2MnX2ZvEg', 'spotify:track:2b8fOow8UzyDFAE27YhOZM', 'spotify:track:41L3O37CECZt3N7ziG2z7l', 'spotify:track:1ToprX3cpBiXoAe5eNSk74', 'spotify:track:2Fxmhks0bxGSBdJ92vM42m', 'spotify:track:5Vzpmk27VQ9M77SCkSkERq', 'spotify:track:0uUNN1nSoUx1A4fkDCWDQ7', 'spotify:track:2dpaYNEQHiRxtZbfNsse99', 'spotify.com:track:1yxgsra98r3qAtxqiGZPiX', 'spotify.com:track:0QVLQbaphpRgNZ5HHjD1iU', 'spotify.com:track:4MsxMuC4eDGYv8pT7snwsn', 'spotify.com:track:4Tb9fdkiPg7m4DZN0WwG1e', 'spotify:track:0arNrzPygksLY2pEbRgBjw', 'spotify:track:3MrRksHupTVEQ7YbA0FsZK', '']
+
+
         window.onSpotifyWebPlaybackSDKReady = () => {
             const token = "{{token}}";
             var player = new Spotify.Player({
@@ -58,52 +62,66 @@
 
                 play({
                     playerInstance: player,
-                    spotify_uri: 'spotify:track:1rlIrbWboTRGeKfHhgbJRZ',
+                    spotify_uri: 'spotify:track:2d4e45fmUnguxh6yqC7gNT',
                 });
             });
-
-
 
             player.connect();
 
 
+            let timer = setInterval(function () {
+                player.getCurrentState().then(state => {
+                    if (!state) {
+                        return;
+                    }
+
+                    $.ajax({
+                        method: 'GET',
+                        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+                        headers: {
+                            'Authorization': `Bearer {{token}}`
+                        },
+                        success: function (response) {
+                            console.log(response)
+                            let img = JSON.stringify(response.item.album.images[0].url);
+                            let song = response.item.name;
+                            let artist = response.item.artists[0].name;
+                            let album = response.item.album.name;
+
+                            console.log(artist, song, img)
+
+                            $("#songName").text("Song: " + song)
+                            $("#artistName").text("By " + artist)
+                            $("#indexImage").css("background-image", "url(" + img + ")");
+
+                            $.ajax({
+                                method: 'PUT',
+                                url: 'https://api.spotify.com/v1/me/player/shuffle?state=true',
+                                headers: {
+                                    'Authorization': `Bearer {{token}}`
+                                },
+                                success: function (data) {
+                                    console.log('shuffled')
+                                }
+                            })
 
 
 
+                        }
+                    })
+                    console.log('Currently Playing');
+                    clearInterval(timer)
+                });
+            }, 300)
         }
 
 
 
 
 
-
     </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script type="text/javascript">
-
-        setTimeout(function () {
-            $.ajax({
-                method: 'GET',
-                url: 'https://api.spotify.com/v1/me/player/currently-playing',
-                headers: {
-                    'Authorization': `Bearer {{token}}`
-                },
-                success: function (response) {
-                    console.log(response)
-                    let img = JSON.stringify(response.item.album.images[0].url);
-                    let song = response.item.name;
-                    let artist = response.item.artists[0].name;
-                    let album = response.item.album.name;
-
-                    console.log(artist, song, img)
-
-                    $("#songName").text("Song: " + song)
-                    $("#artistName").text("By " + artist)
-                    $("#indexImage").css("background-image", "url(" + img + ")");
-
-                }
-            })
-        }, 2000);
 
         $("#fyre-btn").on("click", function (event) {
             event.preventDefault();
@@ -115,7 +133,6 @@
                     'Authorization': `Bearer {{token}}`
                 },
                 success: function (response) {
-                    console.log(response)
                     let img = JSON.stringify(response.item.album.images[0].url);
                     let song = response.item.name;
                     let artist = response.item.artists[0].name;
@@ -132,8 +149,7 @@
                         url: '/api/new',
                         data: newPlaylist,
                         success: function (data) {
-                            console.log('hello')
-                           
+                            console.log('added')
                         }
                     })
                 }
@@ -141,7 +157,15 @@
         });
 
 
+        /* $("#trash-btn").on("click", function(event) {
+             event.preventDefault();
+             console.log('trash click')
+ 
+ 
+         }) */
+
+
+
 
     </script>
 </body>
-
