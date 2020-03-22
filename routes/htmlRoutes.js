@@ -1,11 +1,10 @@
 const Playlist = require("../models/playlistModel.js");
 const querystring = require('querystring');
-const request = require('request'); // "Request" library
+const request = require('request');
 
-
-const client_id = 'e85b89289a214ae4a662fb72e04af092'; // Your client id
-const client_secret = 'af98379121394239860ea4d618489099'; // Your secret
-const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+const client_id = 'e85b89289a214ae4a662fb72e04af092';
+const client_secret = 'af98379121394239860ea4d618489099';
+const redirect_uri = 'http://localhost:8888/callback';
 
 /**
  * Generates a random string containing numbers and letters
@@ -24,36 +23,36 @@ var generateRandomString = function (length) {
 
 var stateKey = 'spotify_auth_state';
 
-module.exports = function(app) {
+module.exports = function (app) {
 
-  app.get('/', function(req, res) {
+  app.get('/', function (req, res) {
     res.render("login")
-})
+  })
 
   app.get('/index/:token', function (req, res) {
     const token = req.params.token;
     res.render("index", { token: token })
   })
 
-  app.get('/playlist/:token', function(req, res) {
+  app.get('/playlist/:token', function (req, res) {
     const token = req.params.token;
-    Playlist.findAll({}).then(function(data) {
+    Playlist.findAll({}).then(function (data) {
       res.render("playlist", {
         playlist: data,
         token: token
       })
     })
   })
-  
+
   app.get('/login', function (req, res) {
-  
+
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
-  
-    // your application requests authorization
-  
+
+    // application requests authorization
+
     var scope = 'streaming user-read-private user-read-email playlist-modify-private user-read-playback-state user-read-currently-playing user-modify-playback-state';
-  
+
     res.redirect('https://accounts.spotify.com/authorize?' +
       querystring.stringify({
         response_type: 'code',
@@ -63,21 +62,20 @@ module.exports = function(app) {
         state: state
       }));
   });
-  
-  app.get('/', function(req, res) {
+
+  app.get('/', function (req, res) {
     res.render('login')
   })
 
-
   app.get('/callback', function (req, res) {
-  
-    // your application requests refresh and access tokens
+
+    // application requests refresh and access tokens
     // after checking the state parameter
-  
+
     var code = req.query.code || null;
     var state = req.query.state || null;
     var storedState = req.cookies ? req.cookies[stateKey] : null;
-  
+
     if (state === null || state !== storedState) {
       res.redirect('/#' +
         querystring.stringify({
@@ -97,43 +95,31 @@ module.exports = function(app) {
         },
         json: true
       };
-  
+
       request.post(authOptions, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-  
+
           var access_token = body.access_token,
             refresh_token = body.refresh_token;
-  
+
           var options = {
             url: 'https://api.spotify.com/v1/me',
             headers: { 'Authorization': 'Bearer ' + access_token },
             json: true
           };
-  
+
           // use the access token to access the Spotify Web API
           request.get(options, function (error, response, body) {
             console.log(body);
           });
-  
-          // we can also pass the token to the browser to make requests from there
-          //   res.redirect('/#' +
-          //     querystring.stringify({
-          //       access_token: access_token,
-          //       refresh_token: refresh_token
-          //     }));
-          // } else {
-          //   res.redirect('/#' +
-          //     querystring.stringify({
-          //       error: 'invalid_token'
-          //     }));
           res.redirect("/index/" + access_token)
         }
       });
     }
   });
-  
+
   app.get('/refresh_token', function (req, res) {
-  
+
     // requesting access token from refresh token
     var refresh_token = req.query.refresh_token;
     var authOptions = {
@@ -145,7 +131,7 @@ module.exports = function(app) {
       },
       json: true
     };
-  
+
     request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         var access_token = body.access_token;
@@ -155,42 +141,4 @@ module.exports = function(app) {
       }
     });
   });
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.render("index", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
-
-  // // Load example page and pass in an example by id
-  // app.get("/example/:id", function(req, res) {
-  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.render("example", {
-  //       example: dbExample
-  //     });
-  //   });
-  // });
-
-  // // Render 404 page for any unmatched routes
-  // app.get("*", function(req, res) {
-  //   res.render("404");
-  // });
 };

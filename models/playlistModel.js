@@ -1,15 +1,10 @@
-// Sequelize (capital) references the standard library
 const Sequelize = require("sequelize");
-// sequelize (lowercase) references our connection to the DB.
 const sequelize = require("../config/connection");
 
 const Playlist = sequelize.define("playlist", {
   image: Sequelize.STRING,
-  // the name of the artist track (a string)
   title: Sequelize.STRING,
-  // the name of the artist (a string)
   artist: Sequelize.STRING,
-  // the genre (a string)
   album: Sequelize.STRING,
 });
 
@@ -17,4 +12,3 @@ const Playlist = sequelize.define("playlist", {
 Playlist.sync();
 
 module.exports = Playlist;
-
