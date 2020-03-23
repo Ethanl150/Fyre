@@ -26,7 +26,6 @@ body {
     margin: auto;
   }
   
-  
   #buttons {
     display: flex;
     justify-content: space-around;
@@ -52,6 +51,11 @@ body {
     color: white;
   }
 
+  .rowInfo {
+    color: black;
+    margin: auto 0;
+  }
+
   a {
     display: block;
     color: orangered;
@@ -63,12 +67,9 @@ body {
     text-decoration: none;
   }
 
-  #addFyre {
-    text-decoration: underline;
-  }
-
   .delete {
     margin: auto 0;
+    margin-top: 45px;
   }
 
   .list-group-item {
@@ -80,13 +81,11 @@ body {
     background-color:lightblue;
     color: black;
 }
+
 .list-group-item.active{
     background-color: lightblue;
     color: black;
 }
-
-
-
 
 .playlistRows {
   background-image: url("/styles/gradient.png");
@@ -102,13 +101,28 @@ body {
 
 }
 
-h5 {
-  color: black;
-  margin: auto 0;
-}
-
 #playlistImage {
   height: 9rem;
   width: 9rem;
   background-color: lightblue;
+}
+
+#login,
+#loggedin {
+    display: none;
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 500px;
+}
+
+#logoimg {
+  display: block;
+  margin: auto;
+  height: 200;
+  height: 200px;
+  width: 188px;
 }
