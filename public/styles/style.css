@@ -69,6 +69,7 @@ body {
 
   .delete {
     margin: auto 0;
+    margin-top: 45px;
   }
 
   .list-group-item {
@@ -116,4 +117,12 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 500px;
+}
+
+#logoimg {
+  display: block;
+  margin: auto;
+  height: 200;
+  height: 200px;
+  width: 188px;
 }
