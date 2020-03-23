@@ -4,7 +4,7 @@ const request = require('request');
 
 const client_id = 'e85b89289a214ae4a662fb72e04af092';
 const client_secret = 'af98379121394239860ea4d618489099';
-const redirect_uri = 'http://localhost:8888/callback';
+const redirect_uri = '/callback';
 
 /**
  * Generates a random string containing numbers and letters
