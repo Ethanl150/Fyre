@@ -11,7 +11,7 @@ var express = require('express'); // Express web server framework
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var exphbs = require("express-handlebars")
-
+var Spotify = require('spotify-web-api-js');
 
 
 var app = express();
