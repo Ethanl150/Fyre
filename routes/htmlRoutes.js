@@ -1,10 +1,17 @@
 const Playlist = require("../models/playlistModel.js");
 const querystring = require('querystring');
 const request = require('request');
+const sequelize = require("../config/connection.js")
 
 const client_id = 'e85b89289a214ae4a662fb72e04af092';
 const client_secret = 'af98379121394239860ea4d618489099';
-const redirect_uri = 'https://fathomless-basin-76899.herokuapp.com/callback';
+let redirect_uri;
+
+if (sequelize.config.host === "localhost") {
+  redirect_uri = "http://localhost:8888/callback"
+} else {
+  redirect_uri = 'https://fathomless-basin-76899.herokuapp.com/callback';
+}
 
 /**
  * Generates a random string containing numbers and letters
