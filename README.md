@@ -2,7 +2,9 @@
  ![Fyre App](fyreapp.png)
 ## Description: 
 
-Fyre is hot new music application that allows users to discover their new favorite songs. Upon entering the user's Spotify login to verify credentials for our Spotify API, the user will be directed to our home page where a random playlist will begin playing 30 second previews of songs for the user. From there, the user can decide if the preview is "Fyre" by clicking the flame icon OR "Trash" by clicking the trash icon. Upon clicking the "Fyre" flame icon, the song shall be added into the users main playlist. On the playlist page, users can add or delete songs manually!
+Fyre is hot new music application that allows users to discover their new favorite songs. Upon entering the user's Spotify login to verify credentials for our Spotify API, the user will be directed to our home page where a random playlist will begin playing 30 second previews of songs for the user. From there, the user can decide if the preview is "Fyre" by clicking the flame icon OR "Trash" by clicking the trash icon. Upon clicking the "Fyre" flame icon, the song shall be added into the users main playlist. On the playlist page, users can add or delete songs manually.
+
+**Spotify Premium is required**.
 
 ## Table Of Contents:
 
