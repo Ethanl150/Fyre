@@ -1,0 +1,128 @@
+body {
+    background: url("https://img.freepik.com/free-photo/wall-wallpaper-concrete-colored-painted-textured-concept_53876-31799.jpg?size=626&ext=jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Righteous', cursive;
+    color: orangered;
+  }
+
+  #loginBtn {
+    display: block;
+    margin: auto;
+  }
+  
+  #indexImage {
+    background-color: black;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    background-size: cover;
+  }
+
+  #artistAndSong {
+    display: flex;
+    flex-flow: column-reverse;
+    width: 15em;
+    height: 23em;
+    margin: auto;
+  }
+  
+  #buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  button {
+    width: 4rem;
+    height: 4rem;
+    box-shadow: 6px 6px 10px  black;
+  }
+  
+  h1 {
+    font-size: 4rem;
+    text-shadow: 3px 3px 10px  black
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    text-shadow: 3px 3px 10px  black
+  }
+
+  h4 {
+    color: white;
+  }
+
+  .rowInfo {
+    color: black;
+    margin: auto 0;
+  }
+
+  a {
+    display: block;
+    color: orangered;
+    width: max-content;
+  }
+  
+  a:hover {
+    color: orange;
+    text-decoration: none;
+  }
+
+  .delete {
+    margin: auto 0;
+    margin-top: 45px;
+  }
+
+  .list-group-item {
+    height: 45px;
+    width: 158px;
+    position: abolute;
+    bottom: 470px;
+    right: 5px;
+    background-color:lightblue;
+    color: black;
+}
+
+.list-group-item.active{
+    background-color: lightblue;
+    color: black;
+}
+
+.playlistRows {
+  background-image: url("/styles/gradient.png");
+}
+
+.row {
+  height: 10rem;
+}
+
+.info {
+  display: flex;
+ justify-content: space-around; 
+
+}
+
+#playlistImage {
+  height: 9rem;
+  width: 9rem;
+  background-color: lightblue;
+}
+
+#login,
+#loggedin {
+    display: none;
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 500px;
+}
+
+#logoimg {
+  display: block;
+  margin: auto;
+  height: 200;
+  height: 200px;
+  width: 188px;
+}

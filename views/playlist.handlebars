@@ -1,0 +1,31 @@
+<h1 class="text-center">Your playlist</h1>
+
+{{#unless playlist}}
+<h2 class="mt-5 text-center">Looks like you don't have any songs to display.</h2>
+{{/unless}}
+
+<a href="/index/{{token}}" class="mt-5 mx-auto">
+    <h2>Add more fyre here!</h2>
+</a>
+<div class="playlistRows container my-5">
+    {{#each playlist}}
+
+    <div class="row">
+        <div id="playlistImage" class="col-2 my-2 ml-5"
+            style="background-image: url({{this.image}}); background-size: cover;"></div>
+        <div class="col-8 info">
+            <h5 class="rowInfo">Title: {{this.title}}</h5>
+            <h5 class="rowInfo">Artist: {{this.artist}}</h5>
+            <h5 class="rowInfo">Album: {{this.album}}</h5>
+        </div>
+        <div class="col-1 trashbtn">
+            <button data-id="{{this.id}}" class="btn btn-danger delete"><i class="fas fa-trash-alt"></i></button>
+        </div>
+    </div>
+    <hr />
+    {{/each}}
+
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>

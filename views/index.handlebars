@@ -1,33 +1,142 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+<a href="/playlist/{{token}}" class="ml-3">
+    <h3 class="mt-3">View Playlist</h3>
+</a>
+<div class="container my-3">
+   <h1><img src="/images/logo.png" id="logoimg"></h1>
+    <br>
+    <div id="indexImage" class="text-center">
+        <div id="artistAndSong">
+            <h4 id="artistName"></h4>
+            <h4 id="songName"></h4>
+        </div>
     </div>
-  </div>
+    <div id="buttons" class="my-4">
+        <button id="trash-btn" class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+        <button id="fyre-btn" class="btn btn-success" type="submit">&#128293</button>
+    </div>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script type="text/javascript">
+
+    const songs = ['spotify:track:28GUjBGqZVcAV4PHSYzkj2', 'spotify:track:3n3Ppam7vgaVa1iaRUc9Lp', 'spotify:track:3twNvmDtFQtAd5gMKedhLD', 'spotify:track:0sf12qNH5qcw8qpgymFOqD', 'spotify:track:6WrI0LAC5M1Rw2MnX2ZvEg', 'spotify:track:2b8fOow8UzyDFAE27YhOZM', 'spotify:track:41L3O37CECZt3N7ziG2z7l', 'spotify:track:1ToprX3cpBiXoAe5eNSk74', 'spotify:track:2Fxmhks0bxGSBdJ92vM42m', 'spotify:track:5Vzpmk27VQ9M77SCkSkERq', 'spotify:track:0uUNN1nSoUx1A4fkDCWDQ7', 'spotify:track:2dpaYNEQHiRxtZbfNsse99', 'spotify:track:1yxgsra98r3qAtxqiGZPiX', 'spotify:track:0QVLQbaphpRgNZ5HHjD1iU', 'spotify:track:4MsxMuC4eDGYv8pT7snwsn', 'spotify:track:6ATrsVaZT7XjkCynxM8cTS', 'spotify:track:0pSBuHjILhNEo55xK1zrRt', 'spotify:track:0arNrzPygksLY2pEbRgBjw', 'spotify:track:3MrRksHupTVEQ7YbA0FsZK', 'spotify:track:2d4e45fmUnguxh6yqC7gNT', 'spotify:track:7DnNU5rQLgy4KEYvFMrGgW', 'spotify:track:3CS5zwqrjggxlRD0QGJAva', 'spotify:track:0kPeZAyIhIfeZNrtfjJGDB', 'spotify:track:4H1ScKTo6abUt8yTXDewct', 'spotify:track:2Hc4t9N2nt37oO4sF9BynI', 'spotify:track:50kpGaPAhYJ3sGmk6vplg0', 'spotify:track:5YkmS18BehACOhIIeUqe6l', 'spotify:track:5poevcmYCOZ8uZQnUuOPxC', 'spotify:track:1251WepWbxP2Nq4qV5J6BB', 'spotify:track:7Mrl042oC3YNDuKOt5MonS', 'spotify:track:2jyYqO2i1OZi6r6b1somy9', 'spotify:track:2LMWkGU5kNhPySQWdp2Fup', 'spotify:track:2hJIp64P8hh2VLtvxuIT3Z', 'spotify:track:1TUXmM5fqQoXTcLEpEazt0', 'spotify:track:79e3gXqYIcj7Hq1Nqfb2fC', 'spotify:track:0wf1psuw2jX9QGnIrpNXFW', 'spotify:track:2pSoLjIoeYfdSXGvUbgk51', 'spotify:track:3NhDsoowimZMc97tDuG1T5', 'spotify:track:4UHs7wzrmy9qvlFnHftLel', 'spotify:track:3n1Gnqcr6WRZHHMlgdGpdc', 'spotify:track:4Rv5fDPvbbX0lNr3umOZSz', 'spotify:track:2B7UWqNqKgPVGQQ6FXn2PP', 'spotify:track:463PQggkmk5tTw8ug0ahOX', 'spotify:track:66TRwr5uJwPt15mfFkzhbi', 'spotify:track:5rb9QrpfcKFHM1EUbSIurX', 'spotify:track:2PpruBYCo4H7WOBJ7Q2EwM', 'spotify:track:0TNLaENR0mjJat58GJ7wOs', 'spotify:track:1TuopWDIuDi1553081zvuU']
+
+    newSong = '';
+
+    function generateSong() {
+        let songId = Math.floor(Math.random() * songs.length)
+        for (let i = 0; i < songs.length; i++) {
+            if (songId === i) {
+                newSong = songs[i]
+                console.log(newSong)
+                return newSong;
+            }
+        }
+    }
+
+    generateSong();
+
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        const token = "{{token}}";
+        var player = new Spotify.Player({
+            name: 'A Spotify Web SDK Player',
+            getOAuthToken: cb => { cb(token); }, volume: 0.1
+        });
+
+        player.addListener('ready', ({ device_id }) => {
+
+            let play = ({
+                spotify_uri,
+                playerInstance: {
+                    _options: {
+                        getOAuthToken,
+                        id
+                    }
+                }
+            }) => {
+                getOAuthToken(access_token => {
+                    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({ uris: [spotify_uri] }),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer {{token}}`
+                        },
+                    });
+                });
+            };
+            play({
+                playerInstance: player,
+                spotify_uri: newSong,
+            });
+        });
+
+        player.connect();
+
+        let timer = setInterval(function () {
+            player.getCurrentState().then(state => {
+                if (!state) {
+                    return;
+                }
+                setTimeout(function () {
+                    $.ajax({
+                        method: 'GET',
+                        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+                        headers: {
+                            'Authorization': `Bearer {{token}}`
+                        },
+                        success: function (response) {
+                            let img = JSON.stringify(response.item.album.images[0].url);
+                            let song = response.item.name;
+                            let artist = response.item.artists[0].name;
+                            let album = response.item.album.name;
+
+                            $("#songName").text("Song: " + song)
+                            $("#artistName").text("By " + artist)
+                            $("#indexImage").css("background-image", "url(" + img + ")");
+                        }
+                    })
+                }, 500)
+                clearInterval(timer)
+            });
+        }, 200)
+
+        $("#fyre-btn").on("click", function (event) {
+            event.preventDefault();
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.spotify.com/v1/me/player/currently-playing',
+                headers: {
+                    'Authorization': `Bearer {{token}}`
+                },
+                success: function (response) {
+                    let img = JSON.stringify(response.item.album.images[0].url);
+                    let song = response.item.name;
+                    let artist = response.item.artists[0].name;
+                    let album = response.item.album.name;
+
+                    const newPlaylist = {
+                        image: img,
+                        title: song,
+                        artist: artist,
+                        album: album
+                    };
+                    $.ajax({
+                        method: 'POST',
+                        url: '/api/new',
+                        data: newPlaylist,
+                        success: function (data) {
+                            location.reload();
+                        }
+                    })
+                }
+            });
+        });
+
+        $("#trash-btn").on("click", function (event) {
+            location.reload();
+        })
+    }
+
+</script>
