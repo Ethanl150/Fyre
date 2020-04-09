@@ -17,7 +17,7 @@ Fyre is hot new music application that allows users to discover their new favori
 
 ## How To Install
 
-Access our application with our deployed link in your web browser: <https://fathomless-basin-76899.herokuapp.com/>
+Access our application with our deployed link in your web browser: <https://fyre-app.herokuapp.com/>
 
 ## Usage
 
